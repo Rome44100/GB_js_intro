@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1</title>
+<link rel="stylesheet" href="css/style.css">
+<script defer src="js/main.js"></script>
+</head>
+<body>
+<main>
+    <div class="wrapper">
+        <div class="degrees">
+            <div class="celsius_wrapper">
+                <label>
+                    <span>Цельсий&nbsp;(Celsius)</span>
+                </label>
+                <div class="take_celsius">
+                    <input id="take_celsius" type="number" maxlength="3" value="20" max="300" min="-300">
+                    <sup>o</sup>
+                </div>
+            </div>
+            <div class="put_fahrenheit">
+                <span>Фаренгейт&nbsp;(Fahrenheit)</span>
+                <br>
+                <span id="put_fahrenheit">68</span><sup>o</sup>
+            </div>
+        </div>
+        <div class="button">
+            <button type="button" id="alertVal">Alert</button>
+        </div>
+    </div>
+</main>
+</body>
+</html>

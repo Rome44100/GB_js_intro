@@ -1,0 +1,78 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+}
+
+input {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: aliceblue;
+}
+
+.wrapper {
+    margin: auto;
+    border: solid 1px #cccccc55;
+    padding: 6rem;
+    box-shadow: 5px 5px 10px #ccc;
+    background-color: beige;
+}
+
+.degrees {
+    display: flex;
+    gap: 2rem;
+}
+
+.take_celsius {
+    padding-top: 2rem;
+}
+
+.take_celsius input,
+.take_celsius sup {
+    font-size: 3rem;
+}
+
+.take_celsius input {
+    width: 8rem;
+    border: solid 1px #cccccc55;
+    cursor: pointer;
+}
+
+.take_celsius sup {
+    position: relative;
+    top: -1.5rem;
+    left: -0.4rem;
+    font-size: 1.3rem;
+}
+
+#put_fahrenheit {
+    font-size: 10rem;
+    line-height: 8rem;
+    letter-spacing: 1rem;
+    letter-spacing: -1.4rem;
+}
+
+.put_fahrenheit sup {
+    font-size: 1.3rem;
+    position: relative;
+    top: -6.5rem;
+    left: .7rem;
+}
+
+.button {
+    text-align: center;
+    padding-top: 2rem;
+}
+
+.button button {
+    cursor: pointer;
+}
