@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2</title>
+</head>
+<body>
+<script>
+"use strict";
+
+// Задание № 1
+// Объясните почему код даёт именно такие результаты?
+
+function exerciseOne() {
+    //пример 1
+    let a = 1, b = 1, c, d;
+    c = ++a;
+    alert(c); // ответ: 2
+    // на точке останова строка 16 с = 2 и а = 2 из-за префиксного инкремента
+    // до этого а = 1, b = 1, c = undefined, d = undefined
+
+    //пример 2
+    d = b++;
+    alert(d);
+    //ответ: 1
+    // постфиксный инкремент увеличивает значение в переменной после присваивания
+    // т.е. сначала d получила значение из b, а затем b увеличилась
+
+    //пример 3
+    c = 2 + ++a;
+    alert(c); // ответ: 5
+    // сначала выполняется префиксный инкремент у a, а переменную а уже один увеличивали
+    // т.е. будет 3, затем складываем цифры 2 + 3 и получаем 5, записываем в c
+
+    //пример 4
+    d = 2 + b++;
+    alert(d); //ответ: 4
+    // здесь сначала берем значение из b, это 2, т.к. в примере 2 переменную инкрементировали
+    // затем складываем и записываем в d, затем b увеличиваем до 3
+    alert(a); //3
+    // см. комментарий к примеру 3
+    alert(b); //3
+    // см. комметарий к примеру 4
+}
+// закоментирую вызов ф-ции, чтобы последующий код запускать без предыдущего
+//exerciseOne();
+
+// Задание № 2
+// Чему будут равны переменные x и a в примере ниже? 
+// Написать почему так произошло (описать последовательность действий).
+
+function exerciseTwo() {
+    let a = 2;
+    let x = 1 + (a *= 2);
+    console.log("a = ", a, " x = ", x);
+    // answer: a = 4, x = 5
+    // сначала скобки, в них значение 2 сперва умножается на цифру 2, 
+    // затем запись результата в переменную а
+    // затем выход из скобок, плюс 1 и запись в х
+}
+
+// закоментирую вызов ф-ции, чтобы последующий код запускать без предыдущего
+//exerciseTwo();
+
+// Задание № 3
+// Объявить две переменные a и b и задать им целочисленные произвольные начальные значения.
+// Затем написать скрипт, который работает по следующему принципу:
+// - если a и b положительные, вывести их разность (ноль можно считать положительным числом);
+// - если а и b отрицательные, вывести их произведение;
+// - * (этот пункт по сложнее, делайте по желанию) если а и b разных знаков, вывести их сумму;
+
+function exerciseThree() {
+    let a = -10;
+    let b = 20;
+    let result = null;
+    let msg = "";
+
+    // если оба положительные
+    if(a > 0 && b > 0) {
+        result = a - b;
+        msg = "Разность между a и b равна ";
+    // если оба отрицательные
+    } else if (a < 0 && b < 0){
+        result = a * b;
+        msg = "Произведение a и b равно ";
+    // если разных знаков
+    } else if((a < 0 && b > 0) || 
+              (a > 0 && b < 0)) {
+        result = a + b;
+        msg = "Сумма a и b равна ";
+    }
+    console.log(msg, result);
+}
+
+// закоментирую вызов ф-ции, чтобы последующий код запускать без предыдущего
+//exerciseThree();
+
+// Задание № 5
+// Реализовать основные 4 арифметические операции (+, -, /, *) в виде функций с двумя параметрами. 
+// Т.е. например, функция для сложения должна принимать два числа, складывать их и возвращать результат.
+
+let operations = {
+    _message: "",
+    _errors: false,
+    _correct: function(num) {
+        num = parseInt(num);
+        if(isNaN(num)) {
+            this._errors = true;
+            return num;
+        } else {
+            this._errors = false;
+            return num;
+        }
+    },
+    getMessage: function() {
+        return this._message;
+    },
+    addition: function(first = 1, second = 1) {
+        first = this._correct(first);
+        second = this._correct(second);
+        this._message = this._errors ? `${first} и ${second} - такие значения нельзя складывать!` : ` это сумма чисел ${first} и ${second}`;
+        if(!this._errors)
+            return (first + second);
+        else
+            return "Ошибка! ";
+    },
+    subtraction: function(first = 1, second = 1) {
+        first = this._correct(first);
+        second = this._correct(second);
+        this._message = this._errors ? `${first} и ${second} - такие значения нельзя вычитать!` : ` это разность чисел ${first} и ${second}`;
+        if(!this._errors)
+            return (first - second);
+        else
+            return "Ошибка! ";
+    },
+    division: function(first = 1, second = 1) {
+        first = this._correct(first);
+        second = this._correct(second);
+        this._message = this._errors ? `${first} и ${second} - такие значения нельзя делить!` : ` это деление чисел ${first} и ${second}`;
+        if(!this._errors)
+            return parseFloat((first / second).toFixed(2));
+        else
+            return "Ошибка! ";
+    },
+    multiplication: function(first = 1, second = 1) {
+        first = this._correct(first);
+        second = this._correct(second);
+        this._message = this._errors ? `${first} и ${second} - такие значения нельзя умножать!` : ` это умножение чисел ${first} и ${second}`;
+        if(!this._errors)
+            return parseFloat((first * second).toFixed(2));
+        else
+            return "Ошибка! ";
+    }
+}
+
+console.log(operations.multiplication(4, NaN) + operations.getMessage());
+console.log(operations.division(4, 3) + operations.getMessage());
+console.log(operations.addition(30, 20) + operations.getMessage());
+console.log(operations.subtraction(14, 12) + operations.getMessage());
+
+// Задание № 5
+
+// Реализовать функцию с тремя параметрами: function mathOperation(arg1, arg2, operation),
+// где arg1, arg2 – значения аргументов, operation – строка с названием операции. 
+// В зависимости от переданного значения операции (использовать switch) 
+// выполнить одну из арифметических операций
+// (использовать функции из задания 4) и вернуть полученное значение.
+
+function mathOperation(arg1 = 1, arg2 = 1, operation = "") {
+    if("string" !== typeof(operation))
+        console.log("Нужно указать строковое значение:",
+                    " addition (сложение), subtraction (вычитание),",
+                    " division (деление), multiplication (умножение).");
+    
+    operation = String(operation);
+    let result = null;
+    switch (operation) {
+        case "addition":
+            result = operations.addition(arg1, arg2);
+            break;
+        case "subtraction":
+            result = operations.subtraction(arg1, arg2);
+            break;
+        case "division":
+            result = operations.division(arg1, arg2);
+            break;
+        case "multiplication":
+            result = operations.multiplication(arg1, arg2);
+            break;
+        default:
+            break;
+    }
+    if(null !== result)
+        return result;
+    else
+        return "Ошибка";
+}
+
+console.log(mathOperation("ijlj", 3, "hello"));
+console.log(mathOperation(2, 3, "multiplication"));
+console.log('Деление равно ', mathOperation(2, 3, "division"));
+
+// Задание № 6
+// Программа должна спросить у пользователя число, это будет количество денег, 
+// которое он хочет положить на счет в банке. 
+// Затем программа должна выдать примерно такое сообщение:
+// "Ваша сумма в 101 рубль успешно зачислена." - в случае если пользователь ввел 101.
+// "Ваша сумма в 10020 рублей успешно зачислена." - в случае если пользователь ввел 10020.
+// "Ваша сумма в 120104 рубля успешно зачислена." - в случае если пользователь ввел 120104.
+// То есть ваша задача выводить слово «рубль» в правильном падеже, в зависимости от введенного числа.
+
+function showRigthCase() {
+    let num = prompt("Введите число, это будет количество денег, " +  
+                      "которое Вы хотите положить на счет в банке: ");
+    // TODO correct num
+    if("" == num){
+        showRigthCase();
+        return;
+    } else {
+        let lastDigit = +num.substring(num.length - 1);
+        let rubleName = "рублей";
+        if(1 == lastDigit) rubleName = "рубль";
+        else if(2 <= lastDigit && 4 >= lastDigit) rubleName = "рубля";
+        else if(5 <= lastDigit && 20 >= lastDigit) rubleName = "рублей";
+
+        alert("Ваша сумма в " + num + " " + rubleName + " успешно зачислена.");
+        return;
+    }
+}
+
+showRigthCase();
+
+</script>
+</body>
+</html>

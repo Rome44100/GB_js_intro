@@ -40,7 +40,8 @@ let quest_3 = function questToConsole() {
 let quest_2 = function varsToConsole() {
     
     // создать две переменные
-    let name = admin = null;
+    let name = null;
+    let admin = null;
 
     // присвоить пеперенной name значение 'Василий'
     name = 'Василий';
