@@ -40,7 +40,8 @@ let quest_3 = function questToConsole() {
 let quest_2 = function varsToConsole() {
     
     // создать две переменные
-    let name = admin = null;
+    let name = null;
+    let admin = null;
 
     // присвоить пеперенной name значение 'Василий'
     name = 'Василий';
@@ -64,22 +65,17 @@ function celsToFahr(val = 20) {
 }
 
 function onChangeField() {
-    let cels = document.getElementById("take_celsius");
-
-    cels.addEventListener("change", function() {
-        let put_fahrenheit = document.getElementById("put_fahrenheit");
-        put_fahrenheit.textContent = celsToFahr(this.value);
+    document.getElementById("take_celsius").addEventListener("change", function() {
+        document.getElementById("put_fahrenheit").textContent = celsToFahr(this.value);
     });
 }
 
 function displayVal() {
-
-    let button = document.getElementById("alertVal");
-
-    button.addEventListener("click", function() {
-        let num = document.getElementById("take_celsius").value;
-        let res = celsToFahr(num);
-        alert(num + " градусов Цельсия равно " + res + " градусов по Фаренгейту.");
+    document.getElementById("alertVal").addEventListener("click", function() {
+        alert(document.getElementById("take_celsius").value + 
+              " градусов Цельсия равно " + 
+              celsToFahr(document.getElementById("take_celsius").value) + 
+              " градусов по Фаренгейту.");
     });
 }
 
