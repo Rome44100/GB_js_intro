@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise one</title>
+</head>
+<body>
+<script>
+'use sctrict';
+
+// Exercise 1.0
+
+// Написать функцию, преобразующую число в объект. Передавая на вход число в диапазоне [0, 999],
+// мы должны получить на выходе объект, в котором в соответствующих свойствах описаны разряды числа:
+// - единицы (в свойстве units)
+// - десятки (в свойстве tens)
+// - сотни (в свойстве hundereds)
+// Например, для числа 45 мы должны получить следующий объект:
+// {
+// units: 5, //это единицы
+// tens: 4, //это десятки
+// hundreds: 0, //это сотни
+// }
+// Если число было передано вне [0, 999] диапазона, не целое число или вообще не число,
+// необходимо выдать соответствующее сообщение с помощью console.log и вернуть пустой объект.
+
+function makeObjectFromNum (num = 999) {
+    if((num === undefined || false === Number.isInteger(num)) || 
+       (num < 0 || num > 999)) {
+        console.log('You must enter a number between 0 and 999!');
+        return;
+    }
+
+    let prep = String(num);
+    let arr = prep.split('');
+
+    return {
+        units: arr[2],
+        tens: arr[1],
+        hundreds: arr[0]
+    }; 
+}
+
+// Не знаю как проверить на undefined
+console.log(makeObjectFromNum(undefined));
+console.log(makeObjectFromNum(880));
+console.log(makeObjectFromNum(123));
+
+// Exercise 1.1
+
+function Product(name, price) {
+    this.name = name;
+    this.price = price;
+}
+
+Product.prototype.make25PercentDiscount = function() {
+    this.price = parseInt(this.price - this.price * 0.25);
+}
+
+let prodOne = new Product('one', 100);
+prodOne.make25PercentDiscount();
+
+class ProductES6 {
+    constructor(name, price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    make25PercentDiscount() {
+        this.price = parseInt(this.price - this.price * 0.25);
+    }
+}
+
+let prodOne_es6 = new ProductES6('two', 849);
+prodOne_es6.make25PercentDiscount();
+
+// EXERCISE 1.2 A
+
+function Post(author, text, date) {
+    this.author = author;
+    this.text = text;
+    this.date = date;
+}
+
+Post.prototype.edit = function(text) {
+    this.text = text;
+}
+
+const postOne = new Post('Mary', 'i"ll be back', '01.01.2028');
+postOne.edit('Sorry, i\'m busy');
+
+class NewPost {
+    constructor(author, text, date) {
+        this.author = author;
+        this.text = text;
+        this.date = date;
+    }
+
+    edit(text) {
+        this.text = text;
+    }
+}
+
+const newPostOne = new NewPost('Jenny', 'you sorry and i', '01.01.2028');
+newPostOne.edit('don\'t write me again');
+
+// EXERCISE 1.2 B
+
+function AttachedPost(author, text, date) {
+    Post.call(this, author, text, date);
+    this.highlighted = false;
+}
+
+AttachedPost.prototype = Object.create(Post.prototype);
+AttachedPost.prototype.constructor = AttachedPost;
+
+AttachedPost.prototype.makeTextHighlighted = function() {
+    this.highlighted = true;
+}
+
+const postTwo = new AttachedPost('Kate', 'bring me back my lipstick', '29.01.2021');
+postTwo.edit('She owed me');
+postTwo.makeTextHighlighted();
+
+// ES6 reilizing
+
+class AttachedPostES6 extends NewPost {
+    constructor(author, text, date) {
+        super(author, text, date);
+        this.highlighted = false;
+    }
+
+    makeTextHighlighted() {
+        this.highlighted = true;
+    }
+}
+
+const postThree = new AttachedPostES6('Judy', 'you are gluttony', '29.01.2021');
+postThree.edit('you are my destiny');
+postThree.makeTextHighlighted();
+
+</script>
+</body>
+</html>
