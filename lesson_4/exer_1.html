@@ -26,7 +26,8 @@
 // необходимо выдать соответствующее сообщение с помощью console.log и вернуть пустой объект.
 
 function makeObjectFromNum (num = 999) {
-    if((num === undefined || false === Number.isInteger(num)) || 
+    //if((num === undefined || false === Number.isInteger(num)) || 
+    if((num === undefined || !Number.isInteger(num)) || 
        (num < 0 || num > 999)) {
         console.log('You must enter a number between 0 and 999!');
         return;
@@ -36,9 +37,9 @@ function makeObjectFromNum (num = 999) {
     let arr = prep.split('');
 
     return {
-        units: arr[2],
-        tens: arr[1],
-        hundreds: arr[0]
+        units: arr[2],      // num % 10
+        tens: arr[1],       // Math.floor(num / 10) % 10
+        hundreds: arr[0]    // Math.floor(num / 100)
     }; 
 }
 

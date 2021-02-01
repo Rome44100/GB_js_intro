@@ -1,16 +1,21 @@
 let mover = {
     /**
-     * Проверяет будет ли входить введенное значение в допустимый диапазон
+     * Проверяет будет ли входить введенное значение в допустимый диапазон - удар о стенку
      * @param {int} direction Направление движения
+     * @returns {boolean} true если не стена
      */
     checkPosition(direction) {
         const prepos = this.getNextPosition(direction);
+        /*
         if (prepos.x >= 0 && prepos.x < config.rowsCount &&
             prepos.y >= 0 && prepos.y < config.colsCount) {
             return true;
         } else {
             return false;
         }
+        */
+        return prepos.x >= 0 && prepos.x < config.rowsCount &&
+            prepos.y >= 0 && prepos.y < config.colsCount;
     },
 
     /**
