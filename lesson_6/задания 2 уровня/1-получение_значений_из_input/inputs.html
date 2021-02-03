@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<input id="from" type="text">
+В инпуте написано: <span></span>
+
+<br>
+<input id="fromMine" type="text">
+В инпуте написано: <span id="toMine"></span>
+
+<!-- Задание.
+1. Сохраните в переменную ссылку на span, например с помощью querySelector.
+2. Сохраните в переменную fromEl ссылку на input, например с помощью getElementById.
+3. Элементу fromEl назначьте обработку события change, у функции обработчика
+этого события должен быть параметр event.
+4. Читайте что было написано в input'e с помощью event.target.value и пишите это
+значение в span.
+-->
+
+<script>
+"use strict";
+
+let spanElem = document.querySelector("span");
+let inputElem = document.getElementById("from");
+
+/**
+ * Функция для записи текста из одного элемента в другой
+ * @param {obj} - объект элемента, из которого берем текст
+ * @param {obj} - объект элемета, в который пишем
+*/
+function setSpanVal(from, to) {
+    to.innerText = from.value;
+}
+
+// не знаю как в callback передавать сразу с параметрами другую функцию
+// по идее это должно выглядеть так inputElem.addEventListener("change", setSpanVal);
+// наверное, как то через объекты или классы
+inputElem.addEventListener("change", function() {
+    setSpanVal(inputElem, spanElem);
+});
+
+// предпочитаю KEYUP, т.к. событие сразу отображется
+// а в случае с change пользователь может даже не понять, 
+// что вводит что-то и даже закрыть вкладку
+let spanMine = document.getElementById("toMine");
+let inputMine = document.getElementById("fromMine");
+
+inputMine.addEventListener("keyup", function() {
+    setSpanVal(inputMine, spanMine);
+});
+</script>
+</body>
+</html>
